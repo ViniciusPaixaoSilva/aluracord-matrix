@@ -1,10 +1,8 @@
-import { Box, Button, Text, TextField, Image } from '@skynexui/components';
-import React from 'react';
-import { useRouter } from 'next/router';
-import appConfig from '../config.json';
-
-
-
+import { Box, Button, Text, TextField, Image } from "@skynexui/components";
+import React from "react";
+import { useRouter } from "next/router";
+import appConfig from "../config.json";
+import defaultImage from "../assets/GitHub.png";
 function Titulo(props) {
   const Tag = props.tag || "h1";
   return (
@@ -36,9 +34,9 @@ function Titulo(props) {
 
 export default function PaginaInicial() {
   //const username = 'ViniciusPaixaoSilva';
-  const [username, setUsername] = React.useState("");
+  const [username, setUsername] = React.useState("ViniciusPaixaoSilva");
+  const user = username.length > 2 ? username : '';
   const rotemento = useRouter();
-
 
   return (
     <>
@@ -76,9 +74,9 @@ export default function PaginaInicial() {
           {/* Formulário */}
           <Box
             as="form"
-            onSubmit={function(infosDoEvento){
+            onSubmit={function (infosDoEvento) {
               infosDoEvento.preventDefault();
-              rotemento.push('/chat')
+              rotemento.push("/chat");
               //window.location.href = '/chat';
             }}
             styleSheet={{
@@ -130,6 +128,7 @@ export default function PaginaInicial() {
                 mainColorLight: appConfig.theme.colors.primary[400],
                 mainColorStrong: appConfig.theme.colors.primary[600],
               }}
+              disabled={user ? false : true}
             />
           </Box>
           {/* Formulário */}
@@ -151,12 +150,12 @@ export default function PaginaInicial() {
             }}
           >
             <Image
-              styleSheet={{
-                borderRadius: "50%",
-                marginBottom: "16px",
-              }}
-              src={`https://github.com/${username}.png`}
-            />
+                    styleSheet={{
+                      borderRadius: "50%",
+                      marginBottom: "16px",
+                    }}
+                    src={user ? `https://github.com/${user}.png`: defaultImage.src}
+                  />
             <Text
               variant="body4"
               styleSheet={{
@@ -166,7 +165,7 @@ export default function PaginaInicial() {
                 borderRadius: "1000px",
               }}
             >
-              {username}
+              {username.length > 2 ? username : "Digite seu usuário do GITHUB"}
             </Text>
           </Box>
           {/* Photo Area */}
