@@ -3,6 +3,8 @@ import React from "react";
 import { useRouter } from "next/router";
 import appConfig from "../config.json";
 import defaultImage from "../assets/GitHub.png";
+
+
 function Titulo(props) {
   const Tag = props.tag || "h1";
   return (
